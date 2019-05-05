@@ -1,9 +1,11 @@
-import {Resource} from "./core";
+import {Resource} from "./core.ts";
 
 export class User implements Resource<UserInfo> {
     private name: string;
     private _uid: number;
     private _gid: number;
+    private _home: string;
+    private _shell: string;
     applied: boolean = false;
 
     constructor(name: string) {
@@ -32,6 +34,8 @@ export class User implements Resource<UserInfo> {
             name: this.name,
             gid: this._gid,
             uid: this._uid,
+            home: this._home,
+            shell: this._shell,
         };
     }
 
@@ -40,19 +44,31 @@ export class User implements Resource<UserInfo> {
     }
 }
 
-/*
- * UserInfo is only accessible when the companion class User has been applied
- * This type lets us access members by their common sense names.
- */
-export interface UserInfo {
-    uid: number;
-    gid: number;
-    name: string;
+export class UserInfo {
+    constructor(
+        public name: string,
+        public uid: number,
+        public gid: number,
+        public home: string,
+        public shell: string
+    ) {
+        this.name = name;
+        this.home = home;
+        this.uid = uid;
+        this.gid = gid;
+        this.shell = shell;
+    }
 }
 
-function getUsers(passwordFile: string): [UserInfo] {
+export function getUsers(passwordFile: string): UserInfo[] {
+    let users: UserInfo[] = [];
     const decoder = new TextDecoder('utf-8');
     const text = decoder.decode(Deno.readFileSync(passwordFile));
-
-    return [];
+    let lines = text.split("\n");
+    for (let line of lines) {
+        let [ username, _, uid, gid, primaryGroup, home, shell ] = line.split(":");
+        let u = new UserInfo(username, Number(uid), Number(gid), home, shell);
+        users.push(u);
+    }
+    return users;
 }
