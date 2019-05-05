@@ -6,6 +6,7 @@ export class User implements Resource<UserInfo> {
     private _gid: number;
     private _home: string;
     private _shell: string;
+    private _group: string;
     applied: boolean = false;
 
     constructor(name: string) {
@@ -36,6 +37,7 @@ export class User implements Resource<UserInfo> {
             uid: this._uid,
             home: this._home,
             shell: this._shell,
+            group: this._group,
         };
     }
 
@@ -49,6 +51,7 @@ export class UserInfo {
         public name: string,
         public uid: number,
         public gid: number,
+        public group: string,
         public home: string,
         public shell: string
     ) {
@@ -67,7 +70,7 @@ export function getUsers(passwordFile: string): UserInfo[] {
     let lines = text.split("\n");
     for (let line of lines) {
         let [ username, _, uid, gid, primaryGroup, home, shell ] = line.split(":");
-        let u = new UserInfo(username, Number(uid), Number(gid), home, shell);
+        let u = new UserInfo(username, Number(uid), Number(gid), primaryGroup, home, shell);
         users.push(u);
     }
     return users;
