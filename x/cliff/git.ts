@@ -10,12 +10,15 @@ export class GitRepo {
         let runOpts: Deno.RunOptions = {
             args: ["git", "clone", this.remoteUrl]
         } 
-        if (opts.recurseSubmodules) {
-            runOpts.args.push("--recurse-submodules")
+        if (opts) {
+            if (opts.recurseSubmodules) {
+                runOpts.args.push("--recurse-submodules")
+            }
+            if (opts.dest) {
+                runOpts.args.push(opts.dest)
+            }
         }
-        if (opts.dest) {
-            runOpts.args.push(opts.dest)
-        }
+
         let result = Deno.run(runOpts);
         return result;
     }
