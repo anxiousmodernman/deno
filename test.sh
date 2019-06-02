@@ -1,5 +1,5 @@
 #!/bin/bash
 
 
-deno -A ./x/cliff/user_test.ts
+deno run -A ./x/cliff/user_test.ts
 

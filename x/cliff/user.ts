@@ -1,4 +1,4 @@
-import {Resource} from "./core.ts";
+import { Resource } from "./core.ts";
 
 export class User implements Resource<UserInfo> {
     private name: string;
@@ -46,21 +46,13 @@ export class User implements Resource<UserInfo> {
     }
 }
 
-export class UserInfo {
-    constructor(
-        public name: string,
-        public uid: number,
-        public gid: number,
-        public group: string,
-        public home: string,
-        public shell: string
-    ) {
-        this.name = name;
-        this.home = home;
-        this.uid = uid;
-        this.gid = gid;
-        this.shell = shell;
-    }
+export interface UserInfo {
+     name: string;
+     uid: number;
+     gid: number;
+     group: string;
+     home: string;
+     shell: string;
 }
 
 export function getUsers(passwordFile: string): UserInfo[] {
@@ -70,7 +62,7 @@ export function getUsers(passwordFile: string): UserInfo[] {
     let lines = text.split("\n");
     for (let line of lines) {
         let [ username, _, uid, gid, primaryGroup, home, shell ] = line.split(":");
-        let u = new UserInfo(username, Number(uid), Number(gid), primaryGroup, home, shell);
+        let u = { name: username, uid: Number(uid), gid: Number(gid), group: primaryGroup, home: home, shell: shell };
         users.push(u);
     }
     return users;
