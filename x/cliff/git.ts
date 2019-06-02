@@ -6,7 +6,7 @@ export class GitRepo {
         this.remoteUrl = remoteUrl;
     }
 
-    public async clone(opts: CloneOpts): Promise<Deno.Process> {
+    public async clone(opts?: CloneOpts): Promise<Deno.Process> {
         let runOpts: Deno.RunOptions = {
             args: ["git", "clone", this.remoteUrl]
         } 
