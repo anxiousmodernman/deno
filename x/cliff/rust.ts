@@ -15,3 +15,10 @@ export namespace Rustup {
         await Deno.copy(p2.stdin, p1.stdout)
     }
 }
+
+export namespace Cargo {
+    export async function build(path: string): Promise<Deno.Process> {
+        let opts: Deno.RunOptions = { args: ["cargo", "build", "--manifest-path", path]}
+        return Deno.run(opts);
+    }
+}
