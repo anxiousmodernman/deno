@@ -28,4 +28,5 @@ export class GitRepo {
 export interface CloneOpts {
     dest?: string;
     recurseSubmodules?: boolean;
+    // TODO(cm): named origin 
 }
