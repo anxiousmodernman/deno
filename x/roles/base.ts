@@ -5,18 +5,18 @@ async function main(): Promise<void> {
   const home = Deno.env()["HOME"];
   Deno.chdir(home);
 
-  await Rustup.install();
+  // await Rustup.install();
 
   const redoxDeps = ["cmake", "make", "nasm", "qemu", "pkg-config", "libfuse-dev", 
     "wget", "gperf", "libhtml-parser-perl", "autoconf", "flex", "autogen"];
   
   Package.install(redoxDeps);
 
-  let sled = new GitRepo("git@github.com:spacejam/sled.git").clone();
+  // let sled = new GitRepo("git@github.com:spacejam/sled.git").clone();
   // careful, redox is several gigs
   // let redox = new GitRepo("https://gitlab.redox-os.org/redox-os/redox.git").clone({ recurseSubmodules: true });
-  
-  await Promise.all([sled]);
+  let redoxer = new GitRepo("https://gitlab.redox-os.org/redox-os/redoxer.git").clone();
+  await Promise.all([redoxer]);
 
   await Cargo.build(home + "/sled/Cargo.toml")
 
