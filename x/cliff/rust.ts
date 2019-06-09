@@ -1,5 +1,5 @@
 export namespace Rustup {
-    export async function install(): Promise<void> {
+    export async function install(): Promise<number> {
 
         // "curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain \"nightly\""
         let opts1: Deno.RunOptions = { 
@@ -15,7 +15,7 @@ export namespace Rustup {
             stderr: null,
         };
         let p2 = Deno.run(opts2);
-        await Deno.copy(p2.stdin, p1.stdout)
+        return Deno.copy(p2.stdin, p1.stdout);
     }
 }
 
