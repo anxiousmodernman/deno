@@ -23,9 +23,9 @@ export namespace Cargo {
     // Path to the cargo binary. This can be overidden.
     export let bin = Deno.env()["HOME"] + "/.cargo/bin/cargo";
     // Build takes a full-qualified path to a Cargo.toml
-    export async function build(path: string): Promise<Deno.Process> {
+    export async function build(path: string): Promise<Deno.ProcessStatus> {
         let opts: Deno.RunOptions = { args: [bin, "build", "--manifest-path", path]}
-        return Deno.run(opts);
+        return Deno.run(opts).status();
     }
 }
 
