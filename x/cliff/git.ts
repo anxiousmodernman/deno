@@ -20,6 +20,7 @@ export class GitRepo {
         }
 
         let result = Deno.run(runOpts);
+        // return a promise 
         return result.status();
     }
 
