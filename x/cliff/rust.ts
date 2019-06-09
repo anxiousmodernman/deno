@@ -1,5 +1,5 @@
 export namespace Rustup {
-    export async function install(): Promise<[Deno.ProcessStatus, Deno.ProcessStatus]> {
+    export async function install(): Promise<[Deno.ProcessStatus, Deno.ProcessStatus, number]> {
 
         // "curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain \"nightly\""
         let opts1: Deno.RunOptions = { 
@@ -15,8 +15,8 @@ export namespace Rustup {
             stderr: null,
         };
         let p2 = Deno.run(opts2);
-        Deno.copy(p2.stdin, p1.stdout);
-        return Promise.all([p1.status(), p2.status()])
+        let p3 = Deno.copy(p2.stdin, p1.stdout);
+        return Promise.all([p1.status(), p2.status(), p3])
     }
 }
 
