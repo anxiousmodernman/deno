@@ -5,3 +5,4 @@ RUN apt-get update
 RUN apt-get -qq -y install curl
 # install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
+ENV PATH="/root/.deno/bin:${PATH}"

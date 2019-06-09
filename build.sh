@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # build our container
-docker build -t anxiousmodernman:latest .
+docker build -t anxiousmodernman/deno:latest .
 

@@ -1,4 +1,5 @@
 # deno
-deno packages
 
-No versioning for now
+Messing around with deno libraries.
+
+Don't use any of this stuff.
