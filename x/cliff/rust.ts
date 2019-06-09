@@ -12,6 +12,7 @@ export namespace Rustup {
             stdin: "piped",
         };
         let p2 = Deno.run(opts2);
+        // do we await this?
         Deno.copy(p2.stdin, p1.stdout);
         return Promise.all([p1.status(), p2.status()]);
     }
