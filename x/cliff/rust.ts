@@ -20,9 +20,11 @@ export namespace Rustup {
 }
 
 export namespace Cargo {
+    // Path to the cargo binary. This can be overidden.
+    export let bin = Deno.env()["HOME"] + "/.cargo/bin/cargo";
     // Build takes a full-qualified path to a Cargo.toml
     export async function build(path: string): Promise<Deno.Process> {
-        let opts: Deno.RunOptions = { args: ["cargo", "build", "--manifest-path", path]}
+        let opts: Deno.RunOptions = { args: [bin, "build", "--manifest-path", path]}
         return Deno.run(opts);
     }
 }
