@@ -5,11 +5,11 @@ async function main(): Promise<void> {
   const home = Deno.env()["HOME"];
   Deno.chdir(home);
 
-  // await Rustup.install();
+  await Rustup.install();
 
   const redoxDeps = ["cmake", "make", "nasm", "qemu", "pkg-config", "libfuse-dev", 
     "wget", "gperf", "libhtml-parser-perl", "autoconf", "flex", "autogen"];
-  
+  //sudo apt-get install qemu-kvm libvirt-bin bridge-utils virt-manager
   Package.install(redoxDeps);
 
   // let sled = new GitRepo("git@github.com:spacejam/sled.git").clone();

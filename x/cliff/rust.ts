@@ -4,14 +4,17 @@ export namespace Rustup {
         // "curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain \"nightly\""
         let opts1: Deno.RunOptions = { 
             args: ["curl", "https://sh.rustup.rs", "-sSf"],
-            stdout: "piped"
+            stdout: "piped",
+            stderr: null,
         };
-        let p1 = await Deno.run(opts1);
+        let p1 = Deno.run(opts1);
         let opts2: Deno.RunOptions = { 
             args: ["sh", "-s", "--", "-y", "--default-toolchain", "nightly"],
-            stdin: "piped"
+            stdin: "piped",
+            stdout: null, 
+            stderr: null,
         };
-        let p2 = await Deno.run(opts2);
+        let p2 = Deno.run(opts2);
         await Deno.copy(p2.stdin, p1.stdout)
     }
 }
@@ -23,3 +26,4 @@ export namespace Cargo {
         return Deno.run(opts);
     }
 }
+
