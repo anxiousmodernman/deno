@@ -18,7 +18,8 @@ async function main(): Promise<void> {
   let redox = new GitRepo("https://gitlab.redox-os.org/redox-os/redox.git").clone({ recurseSubmodules: true });
   //let redoxer = new GitRepo("https://gitlab.redox-os.org/redox-os/redoxer.git").clone();
   console.log("awaiting clones");
-  await Promise.all([redoxer, sled]);
+  //await Promise.all([redoxer, sled]);
+  await Promise.all([redox]);
 
 
   console.log("doing cargo builds");
