@@ -13,10 +13,10 @@ async function main(): Promise<void> {
   console.log("installing redox deps")
   await Package.install(redoxDeps);
 
-  let sled = new GitRepo("git@github.com:spacejam/sled.git").clone();
+  //let sled = new GitRepo("git@github.com:spacejam/sled.git").clone();
   // careful, redox is several gigs
-  // let redox = new GitRepo("https://gitlab.redox-os.org/redox-os/redox.git").clone({ recurseSubmodules: true });
-  let redoxer = new GitRepo("https://gitlab.redox-os.org/redox-os/redoxer.git").clone();
+  let redox = new GitRepo("https://gitlab.redox-os.org/redox-os/redox.git").clone({ recurseSubmodules: true });
+  //let redoxer = new GitRepo("https://gitlab.redox-os.org/redox-os/redoxer.git").clone();
   console.log("awaiting clones");
   await Promise.all([redoxer, sled]);
 
